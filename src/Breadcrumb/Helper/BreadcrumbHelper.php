@@ -3,9 +3,9 @@
 namespace Kematjaya\Breadcrumb\Helper;
 
 use Twig\Environment;
-use Twig\Loader\FilesystemLoader;
 use Kematjaya\Breadcrumb\Lib\Builder;
 use Symfony\Component\Templating\Helper\Helper;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * @author Nur Hidayatullah <kematjaya0@gmail.com>
  */
@@ -15,10 +15,13 @@ class BreadcrumbHelper extends Helper
     
     private $breadcrumbs;
     
-    public function __construct(Environment $templating, Builder $breadcrumbs)
+    private $container;
+    
+    public function __construct(Environment $templating, Builder $breadcrumbs,  ContainerInterface $container)
     {
         $this->templating = $templating;
         $this->breadcrumbs = $breadcrumbs;
+        $this->container = $container;
     }
     
     public function getName(): string 
@@ -29,7 +32,7 @@ class BreadcrumbHelper extends Helper
     function render()
     {
         $loader = $this->templating->getLoader();
-        $loader->addPath(__DIR__.'/../Resources/views');
+        $loader->addPath($this->container->get('kernel')->locateResource('@KmjBreadcrumbBundle/Resources/views'));
         return $this->templating->render('breadcrumb.html.twig', ['breadcrumbs' => $this->breadcrumbs->getAll()]);
     }
 }
