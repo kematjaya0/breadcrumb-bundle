@@ -5,10 +5,14 @@
     <services>
         <defaults public="false" />
         <service id="Kematjaya\Breadcrumb\Lib\Breadcrumb" class="Kematjaya\Breadcrumb\Lib\Breadcrumb"></service>
-        <!--<service id="Kematjaya\Currency\Lib\CurrencyFormat" class="Kematjaya\Currency\Lib\CurrencyFormat">
-            <argument type="service" id="service_container" />
+        <service id="Kematjaya\Breadcrumb\Lib\Builder" class="Kematjaya\Breadcrumb\Lib\Builder">
+            <argument type="service" id="translator" />
+            <call method="setRouter">
+                <argument type="service" id="router" />
+            </call>
         </service>
-        <service id="Kematjaya\Currency\Lib\Terbilang" class="Kematjaya\Currency\Lib\Terbilang"></service>
+        <service id="kematjaya.breadcrumbs_builder" alias="Kematjaya\Breadcrumb\Lib\Builder" public="true"></service>
+        <!--<service id="Kematjaya\Currency\Lib\Terbilang" class="Kematjaya\Currency\Lib\Terbilang"></service>
         <service id="Kematjaya\Tests\Currency\CurrencyFormatTest" class="Kematjaya\Tests\Currency\CurrencyFormatTest">
             <argument type="service" id="service_container" />
         </service>
