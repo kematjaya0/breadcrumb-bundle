@@ -28,9 +28,8 @@ class BreadcrumbHelper extends Helper
 
     function render()
     {
-        $loader = new FilesystemLoader(__DIR__.'/../Resources/views');
-        $this->templating->setLoader($loader);
-        $this->templating->load('breadcrumb.html.twig');
+        $loader = $this->templating->getLoader();
+        $loader->addPath(__DIR__.'/../Resources/views');
         return $this->templating->render('breadcrumb.html.twig', ['breadcrumbs' => $this->breadcrumbs->getAll()]);
     }
 }

@@ -18,10 +18,6 @@
             <tag name="templating.helper" alias="breadcrumbs" />
         </service>
         <service id="kematjaya.breadcrumbs_helper" alias="Kematjaya\Breadcrumb\Helper\BreadcrumbHelper" public="true"></service>
-        <!--<service id="Kematjaya\Currency\Lib\Terbilang" class="Kematjaya\Currency\Lib\Terbilang"></service>
-        <service id="Kematjaya\Tests\Currency\CurrencyFormatTest" class="Kematjaya\Tests\Currency\CurrencyFormatTest">
-            <argument type="service" id="service_container" />
-        </service>-->
         <service id="Kematjaya\Breadcrumb\Extension\BreadcrumbsExtension" class="Kematjaya\Breadcrumb\Extension\BreadcrumbsExtension">
             <argument type="service" id="kematjaya.breadcrumbs_helper" />
             <tag name="twig.extension"/>
