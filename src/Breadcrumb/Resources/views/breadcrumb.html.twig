@@ -9,7 +9,6 @@
         <li>
             {{ breadcrumb.getIcon()|raw }}
             <a href="{{ (breadcrumb.getUrl()) ? breadcrumb.getUrl():'javascript:;' }}"><strong>{{ breadcrumb.getLabel() }}</strong></a>
-            <i class="fa fa-angle-right"></i>
         </li>
         {% endif %}
     {% endfor %}
