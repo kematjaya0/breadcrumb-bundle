@@ -3,6 +3,7 @@
 namespace Kematjaya\Tests\Breadcrumb;
 
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -15,7 +16,8 @@ class AppKernel extends Kernel
     {
         return [
             new \Kematjaya\Breadcrumb\KmjBreadcrumbBundle(),
-            new FrameworkBundle()
+            new FrameworkBundle(),
+            new TwigBundle()
         ];
     }
     

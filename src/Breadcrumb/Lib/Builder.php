@@ -64,9 +64,13 @@ class Builder
     function getAll()
     {
         $last = $this->items->last();
-        $last->setIsLast(true);
-        $key = $this->items->indexOf($last);
-        $this->items->set($key, $last);
+        if($last)
+        {
+            $last->setIsLast(true);
+            $key = $this->items->indexOf($last);
+            $this->items->set($key, $last);
+        }
+            
         return $this->items;
     }
 }

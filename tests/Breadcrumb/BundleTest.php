@@ -26,8 +26,8 @@ class BundleTest extends WebTestCase
         
         // Test if the service exists
         $this->assertTrue($container->has('kematjaya.breadcrumbs_builder'));
+        $this->assertTrue($container->has('kematjaya.breadcrumbs_extension'));
         $service = $container->get('kematjaya.breadcrumbs_builder');
-        //$service->setDefault('home', 'item_category_index', [], '<i class="icon-home"></i>');
         $this->assertInstanceOf(Builder::class, $service);
     }
     

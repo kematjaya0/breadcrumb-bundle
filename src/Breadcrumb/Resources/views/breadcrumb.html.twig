@@ -1,0 +1,16 @@
+<ul class="breadcrumb page-breadcrumb" style="padding: 0px">
+    {% for breadcrumb in breadcrumbs %}
+        {% if breadcrumb.isLast() %}
+        <li style="color:#F00">
+            {{ breadcrumb.getIcon()|raw }}
+            <span><strong>{{ breadcrumb.getLabel() }}</strong></span>
+        </li>
+        {% else %}
+        <li>
+            {{ breadcrumb.getIcon()|raw }}
+            <a href="{{ (breadcrumb.getUrl()) ? breadcrumb.getUrl():'javascript:;' }}"><strong>{{ breadcrumb.getLabel() }}</strong></a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        {% endif %}
+    {% endfor %}
+</ul>

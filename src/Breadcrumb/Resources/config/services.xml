@@ -12,13 +12,20 @@
             </call>
         </service>
         <service id="kematjaya.breadcrumbs_builder" alias="Kematjaya\Breadcrumb\Lib\Builder" public="true"></service>
+        <service id="Kematjaya\Breadcrumb\Helper\BreadcrumbHelper" class="Kematjaya\Breadcrumb\Helper\BreadcrumbHelper">
+            <argument type="service" id="twig" />
+            <argument type="service" id="kematjaya.breadcrumbs_builder" />
+            <tag name="templating.helper" alias="breadcrumbs" />
+        </service>
+        <service id="kematjaya.breadcrumbs_helper" alias="Kematjaya\Breadcrumb\Helper\BreadcrumbHelper" public="true"></service>
         <!--<service id="Kematjaya\Currency\Lib\Terbilang" class="Kematjaya\Currency\Lib\Terbilang"></service>
         <service id="Kematjaya\Tests\Currency\CurrencyFormatTest" class="Kematjaya\Tests\Currency\CurrencyFormatTest">
             <argument type="service" id="service_container" />
-        </service>
-        <service id="Kematjaya\Currency\Twig\PriceExtension" class="Kematjaya\Currency\Twig\PriceExtension">
-            <argument type="service" id="Kematjaya\Currency\Lib\CurrencyFormat" />
-            <tag name="twig.extension"/>
         </service>-->
+        <service id="Kematjaya\Breadcrumb\Extension\BreadcrumbsExtension" class="Kematjaya\Breadcrumb\Extension\BreadcrumbsExtension">
+            <argument type="service" id="kematjaya.breadcrumbs_helper" />
+            <tag name="twig.extension"/>
+        </service>
+        <service id="kematjaya.breadcrumbs_extension" alias="Kematjaya\Breadcrumb\Extension\BreadcrumbsExtension" public="true"></service>
     </services>
 </container>
