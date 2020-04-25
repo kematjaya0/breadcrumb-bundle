@@ -33,6 +33,24 @@ class BreadcrumbHelper extends Helper
     {
         $loader = $this->templating->getLoader();
         $loader->addPath($this->container->get('kernel')->locateResource('@KmjBreadcrumbBundle/Resources/views'));
+        
+        $loadByNamespace = false;
+        $templatePath = 'Resources/views/breadcrumb.html.twig';
+        if(method_exists($loader, 'getPaths'))
+        {
+            foreach($loader->getPaths('KmjBreadcrumb') as $path)
+            {
+                if(file_exists($path.'/'.$templatePath))
+                {
+                    $loadByNamespace = true;
+                    break;
+                }
+            }
+        }
+        if($this->container->has('twig') and $loadByNamespace)
+        {
+            return $this->container->get('twig')->render('@KmjBreadcrumb/'.$templatePath, ['breadcrumbs' => $this->breadcrumbs->getAll()]);
+        }
         return $this->templating->render('breadcrumb.html.twig', ['breadcrumbs' => $this->breadcrumbs->getAll()]);
     }
 }
