@@ -1,4 +1,4 @@
-# Breadcrumb for Symfony 4 and SYmfony 5
+# Breadcrumb for Symfony 4 and Symfony 5
 1. instalation
    ```
    composer require kematjaya/breadcrumb-bundle
