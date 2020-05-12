@@ -6,7 +6,7 @@
         "symfony/templating": "^4.0|^5.0",
         "symfony/translation": "^4.0|^5.0",
         "doctrine/common": "^2.12",
-        "twig/twig": "^3.0",
+        "twig/twig": "^2.0|^3.0",
         "symfony/twig-bundle": "^4.0|^5.0"
     },
     "require-dev": {
