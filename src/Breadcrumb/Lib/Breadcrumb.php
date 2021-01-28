@@ -27,12 +27,12 @@ class Breadcrumb
         return $this->label;
     }
     
-    function getUrl():string
+    function getUrl(): ?string
     {
         return $this->url;
     }
     
-    function getIcon():string
+    function getIcon(): ?string
     {
         return $this->icon;
     }
