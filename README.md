@@ -25,7 +25,7 @@
        */
        public function index(BreacrumbBuilder $builder)
        {
-           $builder->getBuilder()->add('item');
+           $builder->add('item');
            
            ....
        }
@@ -35,8 +35,8 @@
        */
        public function create(BreacrumbBuilder $builder)
        {
-           $builder->getBuilder()->add('item', 'item_index');
-           $builder->getBuilder()->add('create');
+           $builder->add('item', 'item_index');
+           $builder->add('create');
            
            ...
        }

@@ -11,10 +11,23 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class BreadcrumbHelper extends Helper
 {
+    
+    /**
+     * 
+     * @var Environment
+     */
     private $templating;
     
+    /**
+     * 
+     * @var Builder
+     */
     private $breadcrumbs;
     
+    /**
+     * 
+     * @var ContainerInterface
+     */
     private $container;
     
     public function __construct(Environment $templating, Builder $breadcrumbs,  ContainerInterface $container)
@@ -36,21 +49,20 @@ class BreadcrumbHelper extends Helper
         
         $loadByNamespace = false;
         $templatePath = 'Resources/views/breadcrumb.html.twig';
-        if(method_exists($loader, 'getPaths'))
-        {
-            foreach($loader->getPaths('KmjBreadcrumb') as $path)
-            {
-                if(file_exists($path.'/'.$templatePath))
-                {
+        if (method_exists($loader, 'getPaths')) {
+            foreach ($loader->getPaths('KmjBreadcrumb') as $path) {
+                if (file_exists($path . DIRECTORY_SEPARATOR . $templatePath)) {
                     $loadByNamespace = true;
                     break;
                 }
             }
         }
-        if($this->container->has('twig') and $loadByNamespace)
-        {
+        
+        if ($this->container->has('twig') and $loadByNamespace) {
+            
             return $this->container->get('twig')->render('@KmjBreadcrumb/'.$templatePath, ['breadcrumbs' => $this->breadcrumbs->getAll()]);
         }
+        
         return $this->templating->render('breadcrumb.html.twig', ['breadcrumbs' => $this->breadcrumbs->getAll()]);
     }
 }

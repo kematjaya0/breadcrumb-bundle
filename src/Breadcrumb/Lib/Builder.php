@@ -2,6 +2,7 @@
 
 namespace Kematjaya\Breadcrumb\Lib;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -12,10 +13,22 @@ use Symfony\Component\Routing\RouterInterface;
 class Builder 
 {
     
+    /**
+     * 
+     * @var Collection
+     */
     private $items;
     
+    /**
+     * 
+     * @var TranslatorInterface
+     */
     private $translator;
     
+    /**
+     * 
+     * @var RouterInterface
+     */
     private $router;
     
     function __construct(TranslatorInterface $translator) 
@@ -24,48 +37,77 @@ class Builder
         $this->items = new ArrayCollection();
     }
     
+    /**
+     * Set Router Object
+     * @param RouterInterface $router
+     */
     public function setRouter(RouterInterface $router)
     {
         $this->router = $router;
     }
     
-    public function setDefault($label, $urlName = null, $urlParams = [], $icon = null)
+    /**
+     * 
+     * @param string $label
+     * @param string $urlName
+     * @param array $urlParams
+     * @param string $icon
+     * @return self
+     */
+    public function setDefault(string $label, string $urlName = null, array $urlParams = [], string $icon = null):self
     {
-        if(!$this->items->first())
-        {
+        if (!$this->items->first()) {
             $this->add($label, $urlName, $urlParams, $icon);
-        } else
-        {
-            $breadcrumb = $this->produce($label, $urlName, $urlParams, $icon);
-            $exists = $this->items->toArray();
-            $this->items = new ArrayCollection(array_merge([$breadcrumb], $exists));
-        }
+             
+            return $this;
+        } 
+        
+        $breadcrumb = $this->produce($label, $urlName, $urlParams, $icon);
+        $exists = $this->items->toArray();
+        $this->items = new ArrayCollection(array_merge([$breadcrumb], $exists));
         
         return $this;
     }
     
-    function produce($label, $urlName = null, $urlParams = [], $icon = null) 
+    /**
+     * 
+     * @param string $label
+     * @param string $urlName
+     * @param array $urlParams
+     * @param string $icon
+     * @return \Kematjaya\Breadcrumb\Lib\Breadcrumb
+     */
+    public function produce(string $label, string $urlName = null, array $urlParams = [], string $icon = null) 
     {
         $path = null;
-        if($urlName)
-        {
+        if ($urlName) {
             $path = (!empty($urlParams)) ? $this->router->generate($urlName, $urlParams) : $this->router->generate($urlName);
         }
         
         return new Breadcrumb($this->translator->trans($label), $path, $icon);
     }
     
-    function add($label, $urlName = null, $urlParams = [], $icon = null) 
+    /**
+     * 
+     * @param string $label
+     * @param string $urlName
+     * @param array $urlParams
+     * @param string $icon
+     */
+    public function add(string $label, string $urlName = null, array $urlParams = [], string $icon = null) 
     {
         $breadcrumb = $this->produce($label, $urlName, $urlParams, $icon);
         $this->items->add($breadcrumb);
     }
     
-    function getAll()
+    /**
+     * 
+     * @return Collection
+     */
+    public function getAll(): Collection
     {
         $last = $this->items->last();
-        if($last)
-        {
+        if ($last) {
             $last->setIsLast(true);
             $key = $this->items->indexOf($last);
             $this->items->set($key, $last);

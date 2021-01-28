@@ -13,36 +13,38 @@ class Breadcrumb
     
     private $icon;
     
-    private $isLast;
+    private $isLast = false;
     
-    function __construct($label, $url = null, $icon = null) 
+    function __construct(string $label, string $url = null, string $icon = null) 
     {
         $this->label = $label;
         $this->url = $url;
         $this->icon = $icon;
     }
     
-    function getLabel()
+    function getLabel():string
     {
         return $this->label;
     }
     
-    function getUrl()
+    function getUrl():string
     {
         return $this->url;
     }
     
-    function getIcon()
+    function getIcon():string
     {
         return $this->icon;
     }
     
-    function setIsLast($isLast = false) 
+    function setIsLast(bool $isLast = false) :self
     {
         $this->isLast = $isLast;
+        
+        return $this;
     }
     
-    function isLast()
+    function isLast():bool
     {
         return $this->isLast;
     }
