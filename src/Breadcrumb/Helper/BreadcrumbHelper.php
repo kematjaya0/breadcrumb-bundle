@@ -42,6 +42,6 @@ class BreadcrumbHelper extends Helper
             return $this->container->get('twig')->render('@KmjBreadcrumb/'.$templatePath, ['breadcrumbs' => $this->breadcrumbs->getAll()]);
         }
         
-        return $this->templating->render('breadcrumb.html.twig', ['breadcrumbs' => $this->breadcrumbs->getAll()]);
+        return $this->templating->render('@KmjBreadcrumb/breadcrumb.html.twig', ['breadcrumbs' => $this->breadcrumbs->getAll()]);
     }
 }
