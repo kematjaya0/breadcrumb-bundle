@@ -12,29 +12,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class BreadcrumbHelper extends Helper
 {
     
-    /**
-     * 
-     * @var Environment
-     */
-    private $templating;
-    
-    /**
-     * 
-     * @var Builder
-     */
-    private $breadcrumbs;
-    
-    /**
-     * 
-     * @var ContainerInterface
-     */
-    private $container;
-    
-    public function __construct(Environment $templating, Builder $breadcrumbs,  ContainerInterface $container)
+    public function __construct(private Environment $templating, private Builder $breadcrumbs,  private ContainerInterface $container)
     {
-        $this->templating = $templating;
-        $this->breadcrumbs = $breadcrumbs;
-        $this->container = $container;
     }
     
     public function getName(): string 
@@ -42,7 +21,7 @@ class BreadcrumbHelper extends Helper
         return 'breadcrumbs';
     }
 
-    function render()
+    function render():?string
     {
         $loader = $this->templating->getLoader();
         $loader->addPath($this->container->get('kernel')->locateResource('@KmjBreadcrumbBundle/Resources/views'));

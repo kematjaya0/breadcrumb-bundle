@@ -21,19 +21,12 @@ class Builder
     
     /**
      * 
-     * @var TranslatorInterface
-     */
-    private $translator;
-    
-    /**
-     * 
      * @var RouterInterface
      */
     private $router;
     
-    function __construct(TranslatorInterface $translator) 
+    function __construct(private TranslatorInterface $translator)
     {
-        $this->translator = $translator;
         $this->items = new ArrayCollection();
     }
     
