@@ -13,11 +13,7 @@ use Symfony\Component\Routing\RouterInterface;
 class Builder 
 {
     
-    /**
-     * 
-     * @var Collection
-     */
-    private $items;
+    private Collection $items;
     
     /**
      * 
