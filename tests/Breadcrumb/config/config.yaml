@@ -1,0 +1,14 @@
+framework:
+  test: true
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Symfony\Component\Routing\RouterInterface:
+    class: Kematjaya\Tests\Breadcrumb\Utils\Router
+
+#  Symfony\Component\DependencyInjection\ContainerInterface:
+#    class: Symfony\Component\DependencyInjection\Container

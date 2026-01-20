@@ -1,0 +1,16 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Kematjaya\Breadcrumb\Lib\Breadcrumb: ~
+
+  Kematjaya\Breadcrumb\Lib\Builder: ~
+
+  Kematjaya\Breadcrumb\Helper\BreadcrumbHelper:
+    tags:
+      - { name: templating.helper, alias: breadcrumbs }
+
+  Kematjaya\Breadcrumb\Extension\BreadcrumbsExtension:
+    tags: ['twig.extension']

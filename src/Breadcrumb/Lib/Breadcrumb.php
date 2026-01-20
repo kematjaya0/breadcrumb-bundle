@@ -15,7 +15,7 @@ class Breadcrumb
     
     private $isLast = false;
     
-    function __construct(string $label, string $url = null, string $icon = null) 
+    function __construct(string $label, ?string $url = null, ?string $icon = null)
     {
         $this->label = $label;
         $this->url = $url;

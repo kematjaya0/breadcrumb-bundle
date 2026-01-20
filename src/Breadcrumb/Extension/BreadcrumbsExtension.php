@@ -29,7 +29,7 @@ class BreadcrumbsExtension extends AbstractExtension
         return $this->helper->render();
     }
     
-    public function getName()
+    public function getName():string
     {
         return $this->name;
     }

@@ -2,6 +2,7 @@
 
 namespace Kematjaya\Tests\Breadcrumb;
 
+use Kematjaya\Breadcrumb\Extension\BreadcrumbsExtension;
 use Kematjaya\Tests\Breadcrumb\AppKernel;
 use Kematjaya\Breadcrumb\Lib\Breadcrumb;
 use Kematjaya\Breadcrumb\Lib\Builder;
@@ -18,21 +19,48 @@ class BundleTest extends WebTestCase
         $this->assertEquals('test', $br->getLabel());
     }
     
-    public function testInitBundle()
+    public function testInitBundle():void
     {
-        $client = static::createClient();
-        $container = $client->getContainer();
+        $container = static::getContainer();
         // Test if the service exists
-        $this->assertTrue($container->has('kematjaya.breadcrumbs_builder'));
-        $this->assertTrue($container->has('kematjaya.breadcrumbs_extension'));
-        $service = $container->get('kematjaya.breadcrumbs_builder');
-        $ext = $container->get('kematjaya.breadcrumbs_extension');
+        $builder = $container->get(Builder::class);
+        $this->assertInstanceOf(
+            Builder::class,
+            $builder
+        );
+        $ext = $container->get(BreadcrumbsExtension::class);
+        $this->assertInstanceOf(
+            BreadcrumbsExtension::class,
+            $ext
+        );
+        $builder->add("test");
         echo $ext->render();
-        $this->assertInstanceOf(Builder::class, $service);
     }
     
-    public static function getKernelClass() 
+    public static function getKernelClass() :string
     {
         return AppKernel::class;
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        $this->restoreExceptionHandler();
+    }
+
+    protected function restoreExceptionHandler(): void
+    {
+        while (true) {
+            $previousHandler = set_exception_handler(static fn() => null);
+
+            restore_exception_handler();
+
+            if ($previousHandler === null) {
+                break;
+            }
+
+            restore_exception_handler();
+        }
     }
 }

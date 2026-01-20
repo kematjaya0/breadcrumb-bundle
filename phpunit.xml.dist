@@ -2,7 +2,7 @@
 <phpunit bootstrap="./vendor/autoload.php">
 
     <testsuites>
-        <testsuite name="My Project - TestSuite">
+        <testsuite name="Breadcrumb Bundle - TestSuite">
             <directory>./tests</directory>
         </testsuite>
     </testsuites>

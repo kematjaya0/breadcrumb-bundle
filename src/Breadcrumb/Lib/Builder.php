@@ -15,35 +15,12 @@ class Builder
     
     private Collection $items;
     
-    /**
-     * 
-     * @var RouterInterface
-     */
-    private $router;
-    
-    function __construct(private TranslatorInterface $translator)
+    function __construct(private TranslatorInterface $translator, private RouterInterface $router)
     {
         $this->items = new ArrayCollection();
     }
-    
-    /**
-     * Set Router Object
-     * @param RouterInterface $router
-     */
-    public function setRouter(RouterInterface $router)
-    {
-        $this->router = $router;
-    }
-    
-    /**
-     * 
-     * @param string $label
-     * @param string $urlName
-     * @param array $urlParams
-     * @param string $icon
-     * @return self
-     */
-    public function setDefault(string $label, string $urlName = null, array $urlParams = [], string $icon = null):self
+
+    public function setDefault(string $label, ?string $urlName = null, array $urlParams = [], ?string $icon = null):self
     {
         if (!$this->items->first()) {
             $this->add($label, $urlName, $urlParams, $icon);
@@ -57,16 +34,8 @@ class Builder
         
         return $this;
     }
-    
-    /**
-     * 
-     * @param string $label
-     * @param string $urlName
-     * @param array $urlParams
-     * @param string $icon
-     * @return \Kematjaya\Breadcrumb\Lib\Breadcrumb
-     */
-    public function produce(string $label, string $urlName = null, array $urlParams = [], string $icon = null) 
+
+    public function produce(string $label, ?string $urlName = null, array $urlParams = [], ?string $icon = null) :Breadcrumb
     {
         $path = null;
         if ($urlName) {
@@ -75,24 +44,13 @@ class Builder
         
         return new Breadcrumb($this->translator->trans($label), $path, $icon);
     }
-    
-    /**
-     * 
-     * @param string $label
-     * @param string $urlName
-     * @param array $urlParams
-     * @param string $icon
-     */
-    public function add(string $label, string $urlName = null, array $urlParams = [], string $icon = null) 
+
+    public function add(string $label, ?string $urlName = null, array $urlParams = [], ?string $icon = null) :void
     {
         $breadcrumb = $this->produce($label, $urlName, $urlParams, $icon);
         $this->items->add($breadcrumb);
     }
-    
-    /**
-     * 
-     * @return Collection
-     */
+
     public function getAll(): Collection
     {
         $last = $this->items->last();
