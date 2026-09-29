@@ -48,4 +48,11 @@ class Breadcrumb
     {
         return $this->isLast;
     }
+    
+    function setIcon(?string $icon) :self
+    {
+        $this->icon = $icon;
+        
+        return $this;
+    }
 }

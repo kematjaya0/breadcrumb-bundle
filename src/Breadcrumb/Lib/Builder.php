@@ -60,11 +60,21 @@ class Builder
             $this->add($label, $urlName, $urlParams, $icon);
              
             return $this;
-        } 
+        }
         
         $breadcrumb = $this->produce($label, $urlName, $urlParams, $icon);
         $exists = $this->items->toArray();
-        $this->items = new ArrayCollection(array_merge([$breadcrumb], $exists));
+        $this->items = new ArrayCollection(array_merge($exists, [$breadcrumb]));
+        
+        return $this;
+    }
+    
+    /**
+     * Reset all breadcrumbs
+     */
+    public function clear():self
+    {
+        $this->items = new ArrayCollection();
         
         return $this;
     }
