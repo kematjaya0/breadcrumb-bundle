@@ -56,7 +56,7 @@ class Builder
      */
     public function setDefault(string $label, string $urlName = null, array $urlParams = [], string $icon = null):self
     {
-        if (!$this->items->first()) {
+        if ($this->items->isEmpty()) {
             $this->add($label, $urlName, $urlParams, $icon);
              
             return $this;
@@ -116,8 +116,8 @@ class Builder
      */
     public function getAll(): Collection
     {
-        $last = $this->items->last();
-        if ($last) {
+        if (!$this->items->isEmpty()) {
+            $last = $this->items->last();
             $last->setIsLast(true);
             $key = $this->items->indexOf($last);
             $this->items->set($key, $last);
