@@ -41,7 +41,7 @@ class Builder
      * Set Router Object
      * @param RouterInterface $router
      */
-    public function setRouter(RouterInterface $router)
+    public function setRouter(RouterInterface $router):void
     {
         $this->router = $router;
     }
@@ -87,7 +87,7 @@ class Builder
      * @param string $icon
      * @return \Kematjaya\Breadcrumb\Lib\Breadcrumb
      */
-    public function produce(string $label, string $urlName = null, array $urlParams = [], string $icon = null) 
+    public function produce(string $label, string $urlName = null, array $urlParams = [], string $icon = null) :Breadcrumb
     {
         $path = null;
         if ($urlName) {
@@ -104,7 +104,7 @@ class Builder
      * @param array $urlParams
      * @param string $icon
      */
-    public function add(string $label, string $urlName = null, array $urlParams = [], string $icon = null) 
+    public function add(string $label, string $urlName = null, array $urlParams = [], string $icon = null) :void
     {
         $breadcrumb = $this->produce($label, $urlName, $urlParams, $icon);
         $this->items->add($breadcrumb);

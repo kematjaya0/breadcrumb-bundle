@@ -42,7 +42,7 @@ class BreadcrumbHelper extends Helper
         return 'breadcrumbs';
     }
 
-    function render()
+    function render():string
     {
         $loader = $this->templating->getLoader();
         $loader->addPath($this->container->get('kernel')->locateResource('@KmjBreadcrumbBundle/Resources/views'));

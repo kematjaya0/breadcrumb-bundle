@@ -19,7 +19,7 @@ class BreadcrumbsExtension extends AbstractExtension
         $this->helper = $helper;
     }
     
-    public function getFunctions()
+    public function getFunctions():array
     {
         return [
             new TwigFunction('kmj_breadcrumb', [$this, 'render'], ['is_safe' => ['html']])
