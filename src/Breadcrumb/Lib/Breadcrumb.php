@@ -5,54 +5,47 @@ namespace Kematjaya\Breadcrumb\Lib;
 /**
  * @author Nur Hidayatullah <kematjaya0@gmail.com>
  */
-class Breadcrumb 
+class Breadcrumb
 {
-    private $label;
-    
-    private $url;
-    
-    private $icon;
-    
-    private $isLast = false;
-    
-    function __construct(string $label, string $url = null, string $icon = null) 
-    {
-        $this->label = $label;
-        $this->url = $url;
-        $this->icon = $icon;
-    }
-    
-    function getLabel():string
+    private bool $isLast = false;
+
+    public function __construct(
+        private readonly string $label,
+        private readonly ?string $url = null,
+        private ?string $icon = null,
+    ) {}
+
+    public function getLabel(): string
     {
         return $this->label;
     }
-    
-    function getUrl(): ?string
+
+    public function getUrl(): ?string
     {
         return $this->url;
     }
-    
-    function getIcon(): ?string
+
+    public function getIcon(): ?string
     {
         return $this->icon;
     }
-    
-    function setIsLast(bool $isLast = false) :self
+
+    public function setIsLast(bool $isLast = false): self
     {
         $this->isLast = $isLast;
-        
+
         return $this;
     }
-    
-    function isLast():bool
+
+    public function isLast(): bool
     {
         return $this->isLast;
     }
-    
-    function setIcon(?string $icon) :self
+
+    public function setIcon(?string $icon): self
     {
         $this->icon = $icon;
-        
+
         return $this;
     }
 }

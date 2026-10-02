@@ -2,19 +2,21 @@
 
 namespace Kematjaya\Tests\Breadcrumb;
 
+use Kematjaya\Breadcrumb\Lib\Breadcrumb;
 use Kematjaya\Breadcrumb\Lib\Builder;
-use Symfony\Contracts\Translation\TranslatorInterface;
-use Symfony\Component\Routing\RouterInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Nur Hidayatullah <kematjaya0@gmail.com>
  */
 class BuilderTest extends TestCase
 {
-    private $builder;
-    private $translator;
-    private $router;
+    private Builder $builder;
+    private MockObject $translator;
+    private MockObject $router;
 
     protected function setUp(): void
     {
@@ -24,21 +26,21 @@ class BuilderTest extends TestCase
         $this->builder->setRouter($this->router);
     }
 
-    public function testAdd Adds Breadcrumb()
+    public function testAddAddsBreadcrumb(): void
     {
         $this->builder->add('Home', 'homepage');
         $this->assertCount(1, $this->builder->getAll());
     }
 
-    public function testProduce Creates Breadcrumb With Translated Label
+    public function testProduceCreatesBreadcrumbWithTranslatedLabel(): void
     {
         $this->translator->method('trans')->willReturn('Home');
         $breadcrumb = $this->builder->produce('Home', 'homepage');
-        $this->assertInstanceOf(\Kematjaya\Breadcrumb\Lib\Breadcrumb::class, $breadcrumb);
+        $this->assertInstanceOf(Breadcrumb::class, $breadcrumb);
         $this->assertEquals('Home', $breadcrumb->getLabel());
     }
 
-    public function testGetAll Returns Collection With IsLast Set On Last Item()
+    public function testGetAllReturnsCollectionWithIsLastSetOnLastItem(): void
     {
         $this->builder->add('Home', 'homepage');
         $this->builder->add('Profile', 'profile');
@@ -48,15 +50,17 @@ class BuilderTest extends TestCase
         $this->assertTrue($last->isLast());
     }
 
-    public function testSetDefault Adds First Item When Empty()
+    public function testSetDefaultAddsFirstItemWhenEmpty(): void
     {
+        $this->translator->method('trans')->willReturnArgument(0);
         $result = $this->builder->setDefault('Home', 'homepage');
         $this->assertCount(1, $this->builder->getAll());
         $this->assertEquals('Home', $this->builder->getAll()->first()->getLabel());
     }
 
-    public function testSetDefault Prepends New Item()
+    public function testSetDefaultPrependsNewItem(): void
     {
+        $this->translator->method('trans')->willReturnArgument(0);
         $this->builder->add('Home', 'homepage');
         $result = $this->builder->setDefault('Profile', 'profile');
         $items = $this->builder->getAll();
@@ -65,7 +69,7 @@ class BuilderTest extends TestCase
         $this->assertEquals('Profile', $items->last()->getLabel());
     }
 
-    public function testClearResetsItems()
+    public function testClearResetsItems(): void
     {
         $this->builder->add('Home', 'homepage');
         $this->builder->add('Profile', 'profile');

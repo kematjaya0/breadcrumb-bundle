@@ -2,23 +2,22 @@
 
 namespace Kematjaya\Tests\Breadcrumb;
 
-use Kematjaya\Tests\Breadcrumb\AppKernel;
 use Kematjaya\Breadcrumb\Lib\Breadcrumb;
 use Kematjaya\Breadcrumb\Lib\Builder;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
 /**
  * @author Nur Hidayatullah <kematjaya0@gmail.com>
  */
-class BundleTest extends WebTestCase 
+class BundleTest extends WebTestCase
 {
-    
-    public function testCreateBreadcrumb()
+    public function testCreateBreadcrumb(): void
     {
         $br = new Breadcrumb('test');
         $this->assertEquals('test', $br->getLabel());
     }
-    
-    public function testInitBundle()
+
+    public function testInitBundle(): void
     {
         $client = static::createClient();
         $container = $client->getContainer();
@@ -30,8 +29,8 @@ class BundleTest extends WebTestCase
         echo $ext->render();
         $this->assertInstanceOf(Builder::class, $service);
     }
-    
-    public static function getKernelClass() 
+
+    public static function getKernelClass(): string
     {
         return AppKernel::class;
     }
