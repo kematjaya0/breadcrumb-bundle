@@ -10,5 +10,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class KmjBreadcrumbBundle extends Bundle
 {
-    public function build(ContainerBuilder $container): void {}
+    public function build(ContainerBuilder $container): void
+    {
+    }
 }

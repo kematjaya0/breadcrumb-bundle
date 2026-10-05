@@ -4,19 +4,19 @@ namespace Kematjaya\Breadcrumb\Helper;
 
 use Kematjaya\Breadcrumb\Lib\Builder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Templating\Helper\Helper;
 use Twig\Environment;
 
 /**
  * @author Nur Hidayatullah <kematjaya0@gmail.com>
  */
-class BreadcrumbHelper extends Helper
+class BreadcrumbHelper
 {
     public function __construct(
         private readonly Environment $templating,
         private readonly Builder $breadcrumbs,
         private readonly ContainerInterface $container,
-    ) {}
+    ) {
+    }
 
     public function getName(): string
     {

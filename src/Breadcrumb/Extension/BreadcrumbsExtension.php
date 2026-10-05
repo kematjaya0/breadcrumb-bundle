@@ -13,7 +13,9 @@ class BreadcrumbsExtension extends AbstractExtension
 {
     private string $name = 'breadcrumbs';
 
-    public function __construct(private readonly BreadcrumbHelper $helper) {}
+    public function __construct(private readonly BreadcrumbHelper $helper)
+    {
+    }
 
     public function getFunctions(): array
     {

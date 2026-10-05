@@ -13,7 +13,8 @@ class Breadcrumb
         private readonly string $label,
         private readonly ?string $url = null,
         private ?string $icon = null,
-    ) {}
+    ) {
+    }
 
     public function getLabel(): string
     {

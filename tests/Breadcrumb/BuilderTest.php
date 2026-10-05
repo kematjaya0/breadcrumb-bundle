@@ -53,7 +53,7 @@ class BuilderTest extends TestCase
     public function testSetDefaultAddsFirstItemWhenEmpty(): void
     {
         $this->translator->method('trans')->willReturnArgument(0);
-        $result = $this->builder->setDefault('Home', 'homepage');
+        $this->builder->setDefault('Home', 'homepage');
         $this->assertCount(1, $this->builder->getAll());
         $this->assertEquals('Home', $this->builder->getAll()->first()->getLabel());
     }
@@ -62,7 +62,7 @@ class BuilderTest extends TestCase
     {
         $this->translator->method('trans')->willReturnArgument(0);
         $this->builder->add('Home', 'homepage');
-        $result = $this->builder->setDefault('Profile', 'profile');
+        $this->builder->setDefault('Profile', 'profile');
         $items = $this->builder->getAll();
         $this->assertCount(2, $items);
         // After fix, new item should be appended, so Profile should be last

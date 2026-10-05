@@ -16,7 +16,6 @@
             <argument type="service" id="twig" />
             <argument type="service" id="kematjaya.breadcrumbs_builder" />
             <argument type="service" id="service_container" />
-            <tag name="templating.helper" alias="breadcrumbs" />
         </service>
         <service id="kematjaya.breadcrumbs_helper" alias="Kematjaya\Breadcrumb\Helper\BreadcrumbHelper" public="true"></service>
         <service id="Kematjaya\Breadcrumb\Extension\BreadcrumbsExtension" class="Kematjaya\Breadcrumb\Extension\BreadcrumbsExtension">
