@@ -5,28 +5,28 @@ namespace Kematjaya\Tests\Breadcrumb;
 use Kematjaya\Breadcrumb\KmjBreadcrumbBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Kernel;
+
 /**
  * @author Nur Hidayatullah <kematjaya0@gmail.com>
  */
-class AppKernel extends Kernel 
+class AppKernel extends Kernel
 {
-    public function registerBundles():iterable
+    public function registerBundles(): iterable
     {
         return [
             new KmjBreadcrumbBundle(),
             new FrameworkBundle(),
-            new TwigBundle()
+            new TwigBundle(),
         ];
     }
-    
-    public function registerContainerConfiguration(LoaderInterface $loader):void
+
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
-        $loader->load(function (ContainerBuilder $container) use ($loader)
-        {
-            $loader->load(__DIR__ . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.yaml');
+        $loader->load(function (ContainerBuilder $container) use ($loader) {
+            $loader->load(__DIR__ . '/config/config.xml');
 
             $container->addObjectResource($this);
         });
