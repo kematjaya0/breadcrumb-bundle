@@ -26,7 +26,7 @@ class AppKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load(function (ContainerBuilder $container) use ($loader) {
-            $loader->load(__DIR__ . '/config/config.xml');
+            $loader->load(__DIR__ . '/config/config.php');
 
             $container->addObjectResource($this);
         });
